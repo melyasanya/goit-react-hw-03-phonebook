@@ -10,6 +10,17 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    if (localStorage.getItem('STATE')) {
+      this.setState({ contacts: JSON.parse(localStorage.getItem('STATE')) });
+    }
+  }
+
+  componentDidUpdate() {
+    const state = JSON.stringify(this.state.contacts);
+    localStorage.setItem('STATE', state);
+  }
+
   getFilterInput = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
