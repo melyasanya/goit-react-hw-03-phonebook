@@ -16,9 +16,11 @@ export class App extends Component {
     }
   }
 
-  componentDidUpdate() {
-    const state = JSON.stringify(this.state.contacts);
-    localStorage.setItem('STATE', state);
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts.length !== this.state.contacts.length) {
+      const state = JSON.stringify(this.state.contacts);
+      localStorage.setItem('STATE', state);
+    }
   }
 
   getFilterInput = e => {
